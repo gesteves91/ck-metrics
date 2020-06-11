@@ -17,8 +17,8 @@ import shap
 from itertools import cycle
 from scipy import interp
 
-file_features= open("features.txt","w+")
-file_auc= open("auc.txt","w+")
+#file_features= open("features.txt","w+")
+#file_auc= open("auc.txt","w+")
 
 # Parameters
 LABEL_COLUMN_NAME = 'bug'
@@ -40,6 +40,7 @@ total = 0
 best_models = 0
 best_generated_model = 0
 feat = []
+feat_best_gen_model = []
 
 for c in range(1,50):
     feat.append('feature')
@@ -86,23 +87,24 @@ def eval_panel(df, comb):
         #print("%s,%f,%s,%s" % (f, np.mean(A),A,B))
         check_best_models(A,f)
         print("%s,%f" % (f, np.mean(A)))
-        file_features.write(str(f) + "\n")
-        file_auc.write(str(np.mean(A)) + "\n")
+        #file_features.write(str(f) + "\n")
+        #file_auc.write(str(np.mean(A)) + "\n")
         sys.stdout.flush()
 
 def check_best_models(acc,features):
-    global best_models, best_generated_model, feat
+    global best_models, best_generated_model, feat, feat_best_gen_model
 
     model_accuracy = np.mean(acc)*100
 
     # check the number of models above the baseline model
-    if (model_accuracy > 63.6):
+    if (model_accuracy > 62.6):
         best_models = best_models + 1
         if (len(features) < len(feat)):
             feat = features
     # check the highestes model achieved
     if (model_accuracy > best_generated_model):
         best_generated_model = model_accuracy
+        feat_best_gen_model = features
         
 
 # Reads dataset
@@ -136,8 +138,8 @@ for f1 in WANTED_COLUMNS:
          #print("%s,%f,%s,%s" % (f,np.mean(A),A,B))
          check_best_models(A,f)
          print("%s,%f" % (f,np.mean(A)))
-         file_features.write(str(f) + "\n")
-         file_auc.write(str(np.mean(A)) + "\n")
+         #file_features.write(str(f) + "\n")
+         #file_auc.write(str(np.mean(A)) + "\n")
          f.remove(f2)
          sys.stdout.flush()
          avg = avg + np.mean(A)
@@ -154,10 +156,10 @@ for c in range(1,5):
 
 percentage = (best_models / total) * 100
 
-with open('../reports/ant.txt', 'w') as f:
-    print("Total number of models: %i\nBest achieved model: %f\nFeatures related to the smallest set of features: %s\nNumber of best models: %i \nPercentage of best models: %f" % (total,best_generated_model,feat,best_models,percentage), file=f)
+with open('../reports/log4j.txt', 'w+') as f:
+    print("Total number of models: %i\nBest achieved model: %f\n Features of the best achieved model: %s\nFeatures related to the smallest set of features: %s\nNumber of best models: %i \nPercentage of best models: %f" % (total, best_generated_model, feat_best_gen_model, feat, best_models, percentage), file=f)
 
-file_features.close()
-file_auc.close()
+#file_features.close()
+#file_auc.close()
 
 print('file written!!!')
