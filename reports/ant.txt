@@ -1,0 +1,5 @@
+Total number of models: 5203
+Best achieved model: 73.154065
+Features related to the smallest set of features: ['feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature']
+Number of best models: 0 
+Percentage of best models: 0.000000

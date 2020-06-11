@@ -96,7 +96,7 @@ def check_best_models(acc,features):
     model_accuracy = np.mean(acc)*100
 
     # check the number of models above the baseline model
-    if (model_accuracy > 78.5):
+    if (model_accuracy > 63.6):
         best_models = best_models + 1
         if (len(features) < len(feat)):
             feat = features
