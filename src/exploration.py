@@ -17,51 +17,15 @@ import shap
 from itertools import cycle
 from scipy import interp
 
-file_features= open("features-2.txt","w+")
-file_auc= open("auc-2.txt","w+")
+file_features= open("features.txt","w+")
+file_auc= open("auc.txt","w+")
 
 # Parameters
-LABEL_COLUMN_NAME = 'bugs_classification'
-UNWANTED_COLUMNS = ['numberOfMethods', 
-                    'numberOfRefactoringsUntil:',
-                    'noc', 
-                    'numberOfAuthorsUntil:', 
-                    'numberOfPrivateAttributes',
-                    'avgCodeChurnUntil:', 
-                    'avgLinesRemovedUntil:', 
-                    'maxLinesAddedUntil:'
-                    'avgLinesAddedUntil:', 
-                    'lcom',
-                    'CvsLinEntropy', 
-                    'numberOfVersionsUntil:',
-                    'numberOfPublicMethods', 
-                    'numberOfPublicAttributes',
-                    'numberOfAttributesInherited',
-                    'wmc',
-                    'maxCodeChurnUntil:'
-                    ]
+LABEL_COLUMN_NAME = 'bug'
+UNWANTED_COLUMNS = []
 
 WANTED_COLUMNS = [
-       'numberOfFixesUntil:',
-       'linesAddedUntil:',
-       'linesRemovedUntil:', 
-       'maxLinesRemovedUntil:',
-       'codeChurnUntil:',
-       'ageWithRespectTo:', 
-       'weightedAgeWithRespectTo:',
-       'CvsEntropy', 
-       'CvsWEntropy', 
-       'CvsLogEntropy',
-       'CvsExpEntropy', 
-       'cbo', 
-       'dit', 
-       'fanIn', 
-       'fanOut',
-       'numberOfAttributes', 
-       'numberOfAttributesInherited', 
-       'numberOfMethodsInherited',
-       'numberOfPrivateMethods',
-       'rfc',
+       'dit', 'noc', 'cbo', 'rfc', 'lcom', 'ca', 'ce', 'npm', 'lcom3', 'loc', 'dam', 'moa', 'mfa', 'cam', 'ic', 'cbm', 'amc', 'max_cc', 'avg_cc'
        ]
 
 N_FOLDS = 5
@@ -145,7 +109,7 @@ def check_best_models(acc,features):
 df_mblood = pd.read_csv(sys.argv[1])
 
 # Maps label
-df_mblood.dropna(axis=0, subset=['bugs_classification'], inplace=True)
+df_mblood.dropna(axis=0, subset=['bug'], inplace=True)
 
 #all_features = list(df_mblood.columns)
 #for f in UNWANTED_COLUMNS + [LABEL_COLUMN_NAME]:
@@ -190,7 +154,7 @@ for c in range(1,5):
 
 percentage = (best_models / total) * 100
 
-with open('../reports/total-2.txt', 'w') as f:
+with open('../reports/ant.txt', 'w') as f:
     print("Total number of models: %i\nBest achieved model: %f\nFeatures related to the smallest set of features: %s\nNumber of best models: %i \nPercentage of best models: %f" % (total,best_generated_model,feat,best_models,percentage), file=f)
 
 file_features.close()
