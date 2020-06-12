@@ -7,6 +7,7 @@ import random
 from itertools import combinations
 from statsmodels import robust
 from sklearn.metrics import roc_auc_score
+from sklearn.metrics import f1_score
 from sklearn.model_selection import StratifiedKFold
 
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
@@ -72,6 +73,7 @@ def eval_features(df, features):
 
         probas_ = classifier.predict_proba(X[val])
         area = roc_auc_score(y[val], probas_[:, 1])
+        #area = f1_score(y[val], probas_[:,1])
         a.insert(len(a), area)
 
         for i in probas_[:, 1]:
@@ -156,7 +158,7 @@ for c in range(1,5):
 
 percentage = (best_models / total) * 100
 
-with open('../reports/prop.txt', 'w+') as f:
+with open('../reports/total.txt', 'w+') as f:
     print("Total number of models: %i\nBest achieved model: %f\n Features of the best achieved model: %s\nFeatures related to the smallest set of features: %s\nNumber of best models: %i \nPercentage of best models: %f" % (total, best_generated_model, feat_best_gen_model, feat, best_models, percentage), file=f)
 
 #file_features.close()
