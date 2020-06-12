@@ -1,6 +1,6 @@
 Total number of models: 5204
 Best achieved model: 73.154065
  Features of the best achieved model: ['cbo', 'dam', 'ce', 'noc', 'cbm', 'ic', 'ca', 'npm', 'mfa', 'dit', 'moa', 'lcom', 'cam']
-Features related to the smallest set of features: ['lcom']
-Number of best models: 2383 
-Percentage of best models: 45.791699
+Features related to the smallest set of features: ['lcom', 'dam']
+Number of best models: 512 
+Percentage of best models: 9.838586

@@ -1,0 +1,6 @@
+Total number of models: 5197
+Best achieved model: 71.230375
+ Features of the best achieved model: ['rfc', 'cbo', 'dam', 'ic', 'dit', 'max_cc', 'moa', 'ca', 'ce', 'noc', 'avg_cc', 'cbm']
+Features related to the smallest set of features: ['rfc', 'dam']
+Number of best models: 901 
+Percentage of best models: 17.336925
