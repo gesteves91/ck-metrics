@@ -1,0 +1,6 @@
+Total number of models: 5197
+Best achieved model: 79.306672
+ Features of the best achieved model: ['amc', 'cbo', 'mfa', 'cam', 'ca', 'loc', 'lcom3', 'avg_cc', 'lcom', 'dit', 'cbm', 'npm']
+Features related to the smallest set of features: ['amc']
+Number of best models: 4442 
+Percentage of best models: 85.472388
