@@ -1,0 +1,6 @@
+Total number of models: 5197
+Best achieved model: 66.645317
+ Features of the best achieved model: ['rfc', 'ic', 'cam', 'cbm', 'mfa', 'cbo', 'moa', 'ce', 'dit', 'lcom3', 'max_cc', 'lcom']
+Features related to the smallest set of features: ['feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature', 'feature']
+Number of best models: 0 
+Percentage of best models: 0.000000
