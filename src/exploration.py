@@ -162,7 +162,7 @@ for c in range(1,5):
 
 percentage = (best_models / total) * 100
 
-with open('../reports/tomcat_f1.txt', 'w+') as f:
+with open('../reports/prop_f1.txt', 'w+') as f:
     print("Total number of models: %i\nBest achieved model: %f\n Features of the best achieved model: %s\nFeatures related to the smallest set of features: %s\nNumber of best models: %i \nPercentage of best models: %f" % (total, best_generated_model, feat_best_gen_model, feat, best_models, percentage), file=f)
 
 #file_features.close()
