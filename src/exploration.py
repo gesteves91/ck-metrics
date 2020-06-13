@@ -71,13 +71,17 @@ def eval_features(df, features):
 
         classifier = classifier.fit(X[train], y[train])
 
-        probas_ = classifier.predict_proba(X[val])
-        area = roc_auc_score(y[val], probas_[:, 1])
-        #area = f1_score(y[val], probas_[:,1])
+        # AUC
+        #probas_ = classifier.predict_proba(X[val])
+        #area = roc_auc_score(y[val], probas_[:, 1])
+
+        # F1
+        probas_ = classifier.predict(X[val])
+        area = f1_score(y[val], probas_, average="macro")
         a.insert(len(a), area)
 
-        for i in probas_[:, 1]:
-            b.append(i)
+        #for i in probas_[:, 1]:
+        #    b.append(i)
     return a,b
 
 def eval_panel(df, comb):
@@ -158,7 +162,7 @@ for c in range(1,5):
 
 percentage = (best_models / total) * 100
 
-with open('../reports/total.txt', 'w+') as f:
+with open('../reports/tomcat_f1.txt', 'w+') as f:
     print("Total number of models: %i\nBest achieved model: %f\n Features of the best achieved model: %s\nFeatures related to the smallest set of features: %s\nNumber of best models: %i \nPercentage of best models: %f" % (total, best_generated_model, feat_best_gen_model, feat, best_models, percentage), file=f)
 
 #file_features.close()
