@@ -18,8 +18,8 @@ import shap
 from itertools import cycle
 from scipy import interp
 
-#file_features= open("features.txt","w+")
-#file_auc= open("auc.txt","w+")
+file_features= open("features.txt","w+")
+file_auc= open("auc.txt","w+")
 
 # Parameters
 LABEL_COLUMN_NAME = 'bug'
@@ -72,16 +72,17 @@ def eval_features(df, features):
         classifier = classifier.fit(X[train], y[train])
 
         # AUC
-        #probas_ = classifier.predict_proba(X[val])
-        #area = roc_auc_score(y[val], probas_[:, 1])
-
-        # F1
-        probas_ = classifier.predict(X[val])
-        area = f1_score(y[val], probas_, average="macro")
+        probas_ = classifier.predict_proba(X[val])
+        area = roc_auc_score(y[val], probas_[:, 1])
         a.insert(len(a), area)
 
-        #for i in probas_[:, 1]:
-        #    b.append(i)
+        # F1
+        #probas_ = classifier.predict(X[val])
+        #area = f1_score(y[val], probas_, average="macro")
+        #a.insert(len(a), area)
+
+        for i in probas_[:, 1]:
+            b.append(i)
     return a,b
 
 def eval_panel(df, comb):
@@ -93,8 +94,8 @@ def eval_panel(df, comb):
         #print("%s,%f,%s,%s" % (f, np.mean(A),A,B))
         check_best_models(A,f)
         print("%s,%f" % (f, np.mean(A)))
-        #file_features.write(str(f) + "\n")
-        #file_auc.write(str(np.mean(A)) + "\n")
+        file_features.write(str(f) + "\n")
+        file_auc.write(str(np.mean(A)) + "\n")
         sys.stdout.flush()
 
 def check_best_models(acc,features):
@@ -107,6 +108,7 @@ def check_best_models(acc,features):
         best_models = best_models + 1
         if (len(features) < len(feat)):
             feat = features
+
     # check the highestes model achieved
     if (model_accuracy > best_generated_model):
         best_generated_model = model_accuracy
@@ -118,10 +120,6 @@ df_mblood = pd.read_csv(sys.argv[1])
 
 # Maps label
 df_mblood.dropna(axis=0, subset=['bug'], inplace=True)
-
-#all_features = list(df_mblood.columns)
-#for f in UNWANTED_COLUMNS + [LABEL_COLUMN_NAME]:
-#    all_features.remove(f)
 
 RANDOM_STATE = 1
 f = []
@@ -144,8 +142,8 @@ for f1 in WANTED_COLUMNS:
          #print("%s,%f,%s,%s" % (f,np.mean(A),A,B))
          check_best_models(A,f)
          print("%s,%f" % (f,np.mean(A)))
-         #file_features.write(str(f) + "\n")
-         #file_auc.write(str(np.mean(A)) + "\n")
+         file_features.write(str(f) + "\n")
+         file_auc.write(str(np.mean(A)) + "\n")
          f.remove(f2)
          sys.stdout.flush()
          avg = avg + np.mean(A)
@@ -162,10 +160,10 @@ for c in range(1,5):
 
 percentage = (best_models / total) * 100
 
-with open('../reports/total_f1.txt', 'w+') as f:
+with open('../reports/total.txt', 'w+') as f:
     print("Total number of models: %i\nBest achieved model: %f\n Features of the best achieved model: %s\nFeatures related to the smallest set of features: %s\nNumber of best models: %i \nPercentage of best models: %f" % (total, best_generated_model, feat_best_gen_model, feat, best_models, percentage), file=f)
 
-#file_features.close()
-#file_auc.close()
+file_features.close()
+file_auc.close()
 
 print('file written!!!')
