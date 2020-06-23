@@ -93,9 +93,10 @@ def eval_panel(df, comb):
         A,B = eval_features(df, f)
         #print("%s,%f,%s,%s" % (f, np.mean(A),A,B))
         check_best_models(A,f)
+        #print("%s,%f" % (f, np.mean(A)))
         print("%s,%f" % (f, np.mean(A)))
         file_features.write(str(f) + "\n")
-        file_auc.write(str(np.mean(A)) + "\n")
+        file_auc.write(str(A) + "\n")
         sys.stdout.flush()
 
 def check_best_models(acc,features):
@@ -143,7 +144,7 @@ for f1 in WANTED_COLUMNS:
          check_best_models(A,f)
          print("%s,%f" % (f,np.mean(A)))
          file_features.write(str(f) + "\n")
-         file_auc.write(str(np.mean(A)) + "\n")
+         file_auc.write(str(A) + "\n")
          f.remove(f2)
          sys.stdout.flush()
          avg = avg + np.mean(A)
@@ -160,8 +161,8 @@ for c in range(1,5):
 
 percentage = (best_models / total) * 100
 
-with open('../reports/total.txt', 'w+') as f:
-    print("Total number of models: %i\nBest achieved model: %f\n Features of the best achieved model: %s\nFeatures related to the smallest set of features: %s\nNumber of best models: %i \nPercentage of best models: %f" % (total, best_generated_model, feat_best_gen_model, feat, best_models, percentage), file=f)
+#with open('../reports/total.txt', 'w+') as f:
+#    print("Total number of models: %i\nBest achieved model: %f\n Features of the best achieved model: %s\nFeatures related to the smallest set of features: %s\nNumber of best models: %i \nPercentage of best models: %f" % (total, best_generated_model, feat_best_gen_model, feat, best_models, percentage), file=f)
 
 file_features.close()
 file_auc.close()
